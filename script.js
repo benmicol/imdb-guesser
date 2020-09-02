@@ -73,6 +73,7 @@ function checkGuess() {
 	} else {
 		if (userGuess.toFixed(1) === rating) {
 			//guesses.style.backgroundColor = '#009900';
+			userScore++
 			this.style.background = '#009900'
 			this.style.boxShadow = 'inset 0px -3px 7px 0px #005500'
     		//guesses.textContent = 'Correct - Game Over';
