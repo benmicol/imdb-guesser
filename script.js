@@ -18,29 +18,45 @@ ratingbtn2.addEventListener('click', checkGuess);
 resetButton.addEventListener('click', resetGame);
 let randomIndex;
 let movId;
-let omdb;
+//let omdb;
+//let omdb1;
 let rating;
 
 let roundCount = 1;
 let userScore = 0;
 newRound()
 
+//function Get1(movieId){
+    //var Httpreq = new XMLHttpRequest();
+    //Httpreq.open("GET",'http://www.omdbapi.com/?apikey=f69f0628&i='+movieId+'&r=json',false);
+    //Httpreq.send(null);
+    //return JSON.parse(Httpreq.responseText);          
+//}
 function Get(movieId){
-    var Httpreq = new XMLHttpRequest();
-    Httpreq.open("GET",'http://www.omdbapi.com/?apikey=f69f0628&i='+movieId+'&r=json',false);
-    Httpreq.send(null);
-    return JSON.parse(Httpreq.responseText);          
+	fetch('https://www.omdbapi.com/?apikey=f69f0628&i='+movieId+'&r=json', {mode: 'cors'})
+    	.then(function(response) {
+      		return response.json();
+    	})
+    	.then(function(omdb) {
+    		rating = parseFloat(omdb.imdbRating).toFixed(1);
+			title.textContent = omdb.Title + " (" +omdb.Year+")"
+			cast.textContent = omdb.Actors.split(", ")[0] + ", " + omdb.Actors.split(", ")[1]
+			poster.src = omdb.Poster
+			poster.title = omdb.Plot +" (Country: "+omdb.Country+", Type: "+omdb.Type.charAt(0).toUpperCase() + omdb.Type.slice(1)+", Votes: "+omdb.imdbVotes+", Metacritic: "+omdb.Metascore+")"
+			randBtns(rating)
+    	})
 }
 function newRound() {
 	randomIndex = Math.floor(Math.random() * Math.floor(movieIds.length));
 	movId = movieIds[randomIndex]
-	omdb = Get(movId)
-	rating = parseFloat(omdb.imdbRating).toFixed(1);
-	title.textContent = omdb.Title + " (" +omdb.Year+")"
-	cast.textContent = omdb.Actors.split(", ")[0] + ", " + omdb.Actors.split(", ")[1]
+	Get(movId)
+	//omdb1 = Get(movId)
+	//rating = parseFloat(omdb.imdbRating).toFixed(1);
+	//title.textContent = omdb.Title + " (" +omdb.Year+")"
+	//cast.textContent = omdb.Actors.split(", ")[0] + ", " + omdb.Actors.split(", ")[1]
 	posterLink.href = "https://www.imdb.com/title/"+movId
-	poster.src = omdb.Poster
-	poster.title = omdb.Plot +" (Country: "+omdb.Country+", Type: "+omdb.Type.charAt(0).toUpperCase() + omdb.Type.slice(1)+", Votes: "+omdb.imdbVotes+", Metacritic: "+omdb.Metascore+")"
+	//poster.src = omdb.Poster
+	//poster.title = omdb.Plot +" (Country: "+omdb.Country+", Type: "+omdb.Type.charAt(0).toUpperCase() + omdb.Type.slice(1)+", Votes: "+omdb.imdbVotes+", Metacritic: "+omdb.Metascore+")"
 	ratingbtn.style.background=''
 	ratingbtn1.style.background=''
 	ratingbtn2.style.background=''
@@ -48,9 +64,10 @@ function newRound() {
 	ratingbtn1.style.boxShadow=''
 	ratingbtn2.style.boxShadow=''
 	lastResult.textContent = (11 - roundCount) +" guesses remaining. Score: "+userScore+"/10"
-	randBtns()
+	//randBtns()
 }
 function checkGuess() {
+	//console.log(rating)
 	let userGuess = Number(this.value);
 	if (roundCount < 10) {
   		if (userGuess.toFixed(1) === rating) {
@@ -115,7 +132,7 @@ function resetGame() {
 	//resetButton.parentNode.removeChild(resetButton);
 	newRound()
 }
-function randBtns() {
+function randBtns(rating) {
 	let start;
  	let ratingArr = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, 10.0]
   	let ratingX = [Number(((rating-0.1).toFixed(1))),Number(rating),Number(((Number(rating)+0.1).toFixed(1)))]
@@ -129,12 +146,12 @@ function randBtns() {
 	let avail3 = avail2.filter(x => !seedArr.includes(x));
 	let seed2 = avail3[Math.floor(Math.random() * Math.floor(avail3.length - 1))].toFixed(1);
 	start = Math.floor(Math.random() * Math.floor(3)) + 1;
-	console.log("Rating: "+rating)
-	console.log("Avail: " +avail)
-	console.log("avail2: "+avail2)
-	console.log("avail3: "+avail3)
-	console.log("seed1: " +seed1)
-	console.log("seed2: "+seed2)
+	//console.log("Rating: "+rating)
+	//console.log("Avail: " +avail)
+	//console.log("avail2: "+avail2)
+	//console.log("avail3: "+avail3)
+	//console.log("seed1: " +seed1)
+	//console.log("seed2: "+seed2)
 	
  	if (start === 1) {
 		ratingbtn.value = rating

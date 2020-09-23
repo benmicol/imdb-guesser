@@ -3,11 +3,75 @@
 <head>
 	<title>Movie Rating Guessing Game</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<!--<link rel="stylesheet" type="text/css" href="style.css">-->
 	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 	<link rel="manifest" href="site.webmanifest">
+	<style type="text/css">
+		body, html, #imglink {
+	height: 100vh;
+	width: 100vw;
+	padding: 0;
+	margin: 0;
+}
+main {
+	width: 100vw;
+	height: 100vh;
+	display: inline-flex;
+	flex-direction: column;
+	text-align: center;
+	background: linear-gradient(90deg, rgba(49,3,80,1) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(99,0,82,1) 100%);
+	font-size: 2.5vh;
+	font-family: arial;
+	color: white;
+}
+div {
+	margin: auto;
+}
+.ratingbtn {
+	box-shadow:rgb(98, 41, 255) 0 -1vh 2vh 0 inset;
+	background:rgba(0, 0, 0, 0) linear-gradient(rgb(61, 45, 249) 5%, rgb(6, 10, 250) 100%) repeat scroll 0% 0%;
+	background-color:#2dabf9;
+	border-radius:1vh;
+	border:0.3vh solid #0b0e07;
+	cursor:pointer;
+	color:#ffffff;
+	font-size: 4vh;
+	padding: 0.8vh 1.5vh;
+	text-decoration:none;
+	text-shadow:0 0.3vh 0 #263666;
+	margin: 1vh;
+}
+.ratingbtn:hover {
+	background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+	background-color:#0688fa;
+}
+.ratingbtn:active {
+	position:relative;
+	top: 1vh;
+}
+.resultParas p {
+	padding: 1vh;
+	margin: 2vh auto;
+	font-size: 2vh;
+}
+.image {
+	box-shadow: 0px 0px 15vh 0px rgba(82,82,82,1);
+	width: 35vh;
+}
+#imagediv {
+	
+}
+.title {
+	
+}
+.rating {
+	
+}
+</style>
+
+
 </head>
 <body>
 <main>
@@ -16,17 +80,17 @@
 		<h1 id="title"></h1>
 		<h4 id="cast"></h4>
 	</div>
-	<div>
+	<div id="imagediv">
 		<a href="" id="imglink" target="_blank">
 		<img class="image" id="image">
 		</a>
 	</div>	
 	<div class="rating">
 		<!--<h3 id="instruction">Click the Correct Score</h3>-->
-		<p class="test" id="test"></p>
-		<label for="ratingbtn"></label><input type="button" value="1" id="ratingbtn" class="ratingbtn">
-      	<label for="ratingbtn1"></label><input type="button" value="2" id="ratingbtn1" class="ratingbtn">
-      	<label for="ratingbtn2"></label><input type="button" value="3" id="ratingbtn2" class="ratingbtn">
+		<!--<p class="test" id="test"></p>-->
+		<label for="ratingbtn"></label><input type="button" value="1.0" id="ratingbtn" class="ratingbtn">
+      	<label for="ratingbtn1"></label><input type="button" value="2.0" id="ratingbtn1" class="ratingbtn">
+      	<label for="ratingbtn2"></label><input type="button" value="3.0" id="ratingbtn2" class="ratingbtn">
       	<label for="resetbtn"></label><input type="button" value="&#8634" id="resetbtn" class="ratingbtn">
 		<div class="resultParas">
       		<p class="lastResult"></p>
@@ -36,5 +100,5 @@
 	</div>  
 </main>
 </body>
-<script type="text/javascript" src="script.js"></script>
+<script src="script.js"></script>
 </html>
