@@ -17,9 +17,9 @@
     <br />
     <a href="https://benmicol.com/movie">View Demo</a>
     ·
-    <a href="https://github.com/benmicol/imdb-guesser/issues">tierlistrt Bug</a>
+    <a href="https://github.com/benmicol/imdb-guesser/issues">Report Bug</a>
     ·
-    <a href="https://github.com/benmicol/tierlist/issues">Request Feature</a>
+    <a href="https://github.com/benmicol/imdb-guesser/issues">Request Feature</a>
   </p>
 </p>
 
